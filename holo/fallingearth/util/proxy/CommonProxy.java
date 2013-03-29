@@ -20,10 +20,14 @@ public class CommonProxy {
 		eventRegistry();
 		ItemHelper.initItems();
 		BlockHelper.initBlocks();
+		renderRegistry();
 	}
 	
 	public void tickRegistry() {
 		//TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);	
+	}
+	
+	public void renderRegistry() {
 	}
 	
 	public void eventRegistry() {

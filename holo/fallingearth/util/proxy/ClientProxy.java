@@ -1,5 +1,8 @@
 package holo.fallingearth.util.proxy;
 
+import holo.fallingearth.entity.meteor.EntityMeteor;
+import holo.fallingearth.render.RenderMeteor;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -11,11 +14,10 @@ public class ClientProxy extends CommonProxy {
 		super.tickRegistry();
 		//TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 	}
-	
 	@Override
-	public void entityRegistry() {
-		super.entityRegistry();
-		
+	public void renderRegistry() 
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntityMeteor.class, new RenderMeteor());
 	}
 
 }

@@ -15,10 +15,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityMeteor extends EntityThrowable
 {
-    private double direction;
-	private int size;
-	
-	private static final int yHeight = 72;
+	public int size = 1;
+
+	public int innerRotation;
+	private static final int yHeight = 128;
 	
 	public EntityMeteor(World par1World)
     {
@@ -29,18 +29,33 @@ public class EntityMeteor extends EntityThrowable
     {
         super(par1World);
         this.setLocationAndAngles(par2, yHeight, par6, 0.0F, 0.0F);
-        this.direction = this.rand.nextInt(180) * Math.PI;
-        if (!par1World.isRemote && par1World.doChunksNearChunkExist(MathHelper.floor_double(par2), yHeight, MathHelper.floor_double(par6), 10))
-        {
-            par1World.getClosestPlayerToEntity(this, 200);
-        }
+        this.innerRotation = this.rand.nextInt(100000);
     }
 	
 	public EntityMeteor(World par1World, double par2, double par6, int s)
 	{
 		this(par1World, par2, par6);
 		this.size = s;
+        this.setSize(s, s);
+        this.motionX = this.rand.nextGaussian() - 0.5F;
+        this.motionZ = this.rand.nextGaussian() - 0.5F;
+        this.renderDistanceWeight = 12;
 	}
+	
+
+    /**
+     * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
+     * length * 64 * renderDistanceWeight Args: distance
+     */
+    public boolean isInRangeToRenderDist(double par1)
+    {
+        return true;
+    }
+
+    /**
+     * Makes the entity despawn if requirements are reached
+     */
+    protected void despawnEntity() {}
 
     /**
      * Called to update the entity's position/logic.
@@ -48,35 +63,18 @@ public class EntityMeteor extends EntityThrowable
     public void onUpdate()
     {
         super.onUpdate();
-
-        if (this.rand.nextInt(50) == 0)
-        {
-            this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.explode", 0.8F, 0.5F + this.rand.nextFloat() * 0.2F);
-        }
+        this.innerRotation++;
         
-        this.motionX = Math.cos(this.direction) * 0.02 / this.size;
-        this.motionY = Math.sin(this.direction) * 0.02 / this.size;
+        this.motionX /= 0.99F;
+        this.motionZ /= 0.99F;
         
-        //EntityMeteorFlame var20 = new EntityMeteorFlame(this.worldObj, this.posX, this.posY, this.posZ, 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian());
-        //FMLClientHandler.instance().getClient().effectRenderer.addEffect(var20);
+        EntityMeteorFlame var20 = new EntityMeteorFlame(this.worldObj, this.posX, this.posY + 0.5, this.posZ, 0.125*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian(), 0.125*this.rand.nextGaussian());
+        FMLClientHandler.instance().getClient().effectRenderer.addEffect(var20);
     }
-
-    @SideOnly(Side.CLIENT)
-
-    /**
-     * Checks using a Vec3d to determine if this entity is within range of that vector to be rendered. Args: vec3D
-     */
-    public boolean isInRangeToRenderVec3D(Vec3 par1Vec3)
-    {
-        return true;
-    }
-
-    /**
-     * Gets the amount of gravity to apply to the thrown entity with each tick.
-     */
+    
     protected float getGravityVelocity()
     {
-        return (float) (0.01 / this.size);
+        return 0.01F;
     }
 
 	@Override

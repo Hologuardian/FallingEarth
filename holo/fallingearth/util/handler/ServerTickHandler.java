@@ -36,10 +36,10 @@ public class ServerTickHandler implements ITickHandler
 
 	public void onTickInGame()
 	{
-		int ticks = MinecraftServer.getServer().getTickCounter();
-		if ((ticks & 24000) == 12000 && ticks > 72000)
-		{
-			MeteorDropHandler.DropMeteor(1);
-		}
+		//int ticks = MinecraftServer.getServer().getTickCounter();
+		//if ((ticks & 24000) == 12000 && ticks > 72000)
+		//{
+		//	MeteorDropHandler.DropMeteor(1);
+		//}
 	}
 }

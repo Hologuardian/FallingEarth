@@ -1,0 +1,57 @@
+package holo.fallingearth.render;
+
+import holo.fallingearth.entity.meteor.EntityMeteor;
+import holo.fallingearth.model.ModelMeteor;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
+public class RenderMeteor extends Render
+{
+    private int field_76996_a = -1;
+    private ModelBase field_76995_b;
+
+    public RenderMeteor()
+    {
+        this.shadowSize = 0.5F;
+    }
+
+    /**
+     * Renders the Ender Crystal.
+     */
+    public void doRenderMeteor(EntityMeteor par1EntityMeteor, double par2, double par4, double par6, float par8, float par9)
+    {
+        if (this.field_76996_a != 1)
+        {
+            this.field_76995_b = new ModelMeteor(0.0F, true, 3);
+            this.field_76996_a = 1;
+        }
+
+        float f2 = (float)par1EntityMeteor.innerRotation + par9;
+        GL11.glPushMatrix();
+        GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+        this.loadTexture("/textures/entity/meteor.png");
+        float f3 = MathHelper.sin(f2 * 0.2F) / 2.0F + 0.5F;
+        f3 += f3 * f3;
+        this.field_76995_b.render(par1EntityMeteor, 0.0F, f2 * 3.0F, f3 * 0.2F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
+    }
+
+    /**
+     * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
+     * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
+     * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
+     * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
+     */
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    {
+        this.doRenderMeteor((EntityMeteor)par1Entity, par2, par4, par6, par8, par9);
+    }
+}

@@ -24,7 +24,7 @@ public class ItemMeteorSpawner extends Item
     {
         if (!par2.isRemote)
         {
-        	par2.spawnEntityInWorld(new EntityMeteor(par2, par3.posX, par3.posZ, 5));
+        	par2.spawnEntityInWorld(new EntityMeteor(par2, par3.posX, par3.posZ, 10));
         }
 
         return par1;
