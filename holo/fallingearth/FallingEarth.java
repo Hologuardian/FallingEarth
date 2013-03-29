@@ -29,6 +29,7 @@ public class FallingEarth
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		instance = this;
+		proxy.configRegistry(event);
 	}
 	
 	@Init

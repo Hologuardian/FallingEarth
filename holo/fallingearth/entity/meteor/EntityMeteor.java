@@ -1,48 +1,37 @@
 package holo.fallingearth.entity.meteor;
 
-import java.util.List;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import holo.fallingearth.entity.particle.EntityMeteorFlame;
+import holo.fallingearth.util.handler.MeteorLandHandler;
 import net.minecraft.entity.effect.EntityWeatherEffect;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityMeteor extends EntityWeatherEffect
 {
-    /**
-     * Declares which state the lightning bolt is in. Whether it's in the air, hit the ground, etc.
-     */
-    private int lightningState;
+    private double direction;
+	private int size;
 
-    /**
-     * A random long that is used to change the vertex of the lightning rendered in RenderLightningBolt
-     */
-    public long boltVertex = 0L;
-
-    /**
-     * Determines the time before the EntityLightningBolt is destroyed. It is a random integer decremented over time.
-     */
-    private int boltLivingTime;
-
-    public EntityMeteor(World par1World, double par2, double par6)
+	public EntityMeteor(World par1World, double par2, double par6)
     {
         super(par1World);
         this.setLocationAndAngles(par2, 250, par6, 0.0F, 0.0F);
-        this.lightningState = 2;
-        this.boltVertex = this.rand.nextLong();
-        this.boltLivingTime = this.rand.nextInt(3) + 1;
-
+        this.direction = this.rand.nextInt(180) * Math.PI;
         if (!par1World.isRemote && par1World.doChunksNearChunkExist(MathHelper.floor_double(par2), 250, MathHelper.floor_double(par6), 10))
         {
             par1World.getClosestPlayerToEntity(this, 200);
         }
     }
+	
+	public EntityMeteor(World par1World, double par2, double par6, int s)
+	{
+		this(par1World, par2, par6);
+		this.size = s;
+	}
 
     /**
      * Called to update the entity's position/logic.
@@ -51,57 +40,21 @@ public class EntityMeteor extends EntityWeatherEffect
     {
         super.onUpdate();
 
-        if (this.lightningState == 2)
+        if (this.rand.nextInt(50) == 0)
         {
-            this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "ambient.weather.thunder", 10000.0F, 0.8F + this.rand.nextFloat() * 0.2F);
-            this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.explode", 2.0F, 0.5F + this.rand.nextFloat() * 0.2F);
+            this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.explode", 0.8F, 0.5F + this.rand.nextFloat() * 0.2F);
         }
 
-        --this.lightningState;
-
-        if (this.lightningState < 0)
+        if (this.onGround)
         {
-            if (this.boltLivingTime == 0)
-            {
-                this.setDead();
-            }
-            else if (this.lightningState < -this.rand.nextInt(10))
-            {
-                --this.boltLivingTime;
-                this.lightningState = 1;
-                this.boltVertex = this.rand.nextLong();
-
-                if (!this.worldObj.isRemote && this.worldObj.doChunksNearChunkExist(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ), 10))
-                {
-                    int i = MathHelper.floor_double(this.posX);
-                    int j = MathHelper.floor_double(this.posY);
-                    int k = MathHelper.floor_double(this.posZ);
-
-                    if (this.worldObj.getBlockId(i, j, k) == 0 && Block.fire.canPlaceBlockAt(this.worldObj, i, j, k))
-                    {
-                        this.worldObj.setBlock(i, j, k, Block.fire.blockID);
-                    }
-                }
-            }
+        	this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, this.size, true);
+        	MeteorLandHandler.land(this.worldObj, this.posX, this.posY, this.posZ, this.size);
+        	this.setDead();
         }
-
-        if (this.lightningState >= 0)
+        else
         {
-            if (this.worldObj.isRemote)
-            {
-                this.worldObj.lastLightningBolt = 2;
-            }
-            else
-            {
-                double d0 = 3.0D;
-                List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB(this.posX - d0, this.posY - d0, this.posZ - d0, this.posX + d0, this.posY + 6.0D + d0, this.posZ + d0));
-
-                for (int l = 0; l < list.size(); ++l)
-                {
-                    Entity entity = (Entity)list.get(l);
-                    entity.onStruckByLightning(this);
-                }
-            }
+        	EntityMeteorFlame var20 = new EntityMeteorFlame(this.worldObj, this.posX, this.posY, this.posZ, 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian());
+            FMLClientHandler.instance().getClient().effectRenderer.addEffect(var20);
         }
     }
 
@@ -124,6 +77,6 @@ public class EntityMeteor extends EntityWeatherEffect
      */
     public boolean isInRangeToRenderVec3D(Vec3 par1Vec3)
     {
-        return this.lightningState >= 0;
+        return true;
     }
 }
