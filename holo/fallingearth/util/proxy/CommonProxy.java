@@ -1,5 +1,6 @@
 package holo.fallingearth.util.proxy;
 
+import holo.fallingearth.util.helper.ConfigHelper;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -13,6 +14,7 @@ public class CommonProxy {
 	public static int START_EID = 0;
 
 	public void init(FMLInitializationEvent event) {
+		configRegistry(event);
 		entityRegistry();
 		tickRegistry();
 		eventRegistry();
@@ -39,4 +41,8 @@ public class CommonProxy {
 		return EntityRegistry.findGlobalUniqueEntityId();
 	}
 
+	public void configRegistry(FMLInitializationEvent event)
+	{
+		ConfigHelper.init(event)
+	}
 }
