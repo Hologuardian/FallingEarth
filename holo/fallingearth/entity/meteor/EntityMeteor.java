@@ -3,25 +3,34 @@ package holo.fallingearth.entity.meteor;
 import holo.fallingearth.entity.particle.EntityMeteorFlame;
 import holo.fallingearth.util.handler.MeteorLandHandler;
 import net.minecraft.entity.effect.EntityWeatherEffect;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMeteor extends EntityWeatherEffect
+public class EntityMeteor extends EntityThrowable
 {
     private double direction;
 	private int size;
-
+	
+	private static final int yHeight = 72;
+	
+	public EntityMeteor(World par1World)
+    {
+        super(par1World);
+    }
+	
 	public EntityMeteor(World par1World, double par2, double par6)
     {
         super(par1World);
-        this.setLocationAndAngles(par2, 250, par6, 0.0F, 0.0F);
+        this.setLocationAndAngles(par2, yHeight, par6, 0.0F, 0.0F);
         this.direction = this.rand.nextInt(180) * Math.PI;
-        if (!par1World.isRemote && par1World.doChunksNearChunkExist(MathHelper.floor_double(par2), 250, MathHelper.floor_double(par6), 10))
+        if (!par1World.isRemote && par1World.doChunksNearChunkExist(MathHelper.floor_double(par2), yHeight, MathHelper.floor_double(par6), 10))
         {
             par1World.getClosestPlayerToEntity(this, 200);
         }
@@ -44,31 +53,13 @@ public class EntityMeteor extends EntityWeatherEffect
         {
             this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.explode", 0.8F, 0.5F + this.rand.nextFloat() * 0.2F);
         }
-
-        if (this.onGround)
-        {
-        	this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, this.size, true);
-        	MeteorLandHandler.land(this.worldObj, this.posX, this.posY, this.posZ, this.size);
-        	this.setDead();
-        }
-        else
-        {
-        	EntityMeteorFlame var20 = new EntityMeteorFlame(this.worldObj, this.posX, this.posY, this.posZ, 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian());
-            FMLClientHandler.instance().getClient().effectRenderer.addEffect(var20);
-        }
+        
+        this.motionX = Math.cos(this.direction) * 0.02 / this.size;
+        this.motionY = Math.sin(this.direction) * 0.02 / this.size;
+        
+        //EntityMeteorFlame var20 = new EntityMeteorFlame(this.worldObj, this.posX, this.posY, this.posZ, 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian(), 0.25*this.rand.nextGaussian());
+        //FMLClientHandler.instance().getClient().effectRenderer.addEffect(var20);
     }
-
-    protected void entityInit() {}
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
 
     @SideOnly(Side.CLIENT)
 
@@ -79,4 +70,21 @@ public class EntityMeteor extends EntityWeatherEffect
     {
         return true;
     }
+
+    /**
+     * Gets the amount of gravity to apply to the thrown entity with each tick.
+     */
+    protected float getGravityVelocity()
+    {
+        return (float) (0.01 / this.size);
+    }
+
+	@Override
+	protected void onImpact(MovingObjectPosition movingobjectposition) 
+	{
+		this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, this.size, true);
+    	MeteorLandHandler.land(this.worldObj, this.posX, this.posY, this.posZ, this.size);
+    	this.setDead();
+		
+	}
 }

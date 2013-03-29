@@ -13,12 +13,12 @@ public class ConfigHelper
 	
 	public static void init(FMLPreInitializationEvent event)
 	{
-		File file = new File(event.getModConfigurationDirectory(), "DivineRPGTwilight.cfg");
+		File file = new File(event.getModConfigurationDirectory(), "FallingEarth.cfg");
 		Configuration config = new Configuration(file);
 		config.load();
 		MeteorStoneID = config.getBlock("MeteorStone", 3200).getInt();
 
-		MeteorStoneID = config.getItem("MeteorSpawner", 5500).getInt();
+		MeteorSpawnerID = config.getItem("MeteorSpawner", 5500).getInt();
 		config.save();
 	}
 }

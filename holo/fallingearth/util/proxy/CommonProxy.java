@@ -2,7 +2,9 @@ package holo.fallingearth.util.proxy;
 
 import holo.fallingearth.FallingEarth;
 import holo.fallingearth.entity.meteor.EntityMeteor;
+import holo.fallingearth.util.helper.BlockHelper;
 import holo.fallingearth.util.helper.ConfigHelper;
+import holo.fallingearth.util.helper.ItemHelper;
 import net.minecraft.entity.Entity;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -10,12 +12,14 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class CommonProxy {
 	
-	public static int START_EID = 0;
+	public static int START_EID = 130;
 
 	public void init(FMLInitializationEvent event) {
 		entityRegistry();
 		tickRegistry();
 		eventRegistry();
+		ItemHelper.initItems();
+		BlockHelper.initBlocks();
 	}
 	
 	public void tickRegistry() {
