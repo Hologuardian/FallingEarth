@@ -36,6 +36,8 @@ public class CommonProxy {
 	
 	public void entityRegistry() {
 		registerEntity(EntityMeteor.class, "FallingEarth_Meteor", START_EID++, 64, 10, true);
+		registerEntity(EntityMeteor.class, "FallingEarth_Meteorite", START_EID++, 64, 10, true);
+		registerEntity(EntityMeteor.class, "FallingEarth_MeteorSpawn", START_EID++, 64, 10, true);
 	}
 	
 	public void registerEntity(Class<? extends Entity> clazz, String name, int modID, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {

@@ -37,7 +37,7 @@ public class RenderMeteor extends Render
         float f2 = (float)par1EntityMeteor.innerRotation + par9;
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
-        this.loadTexture("/textures/entity/meteor.png");
+        this.loadTexture("/holo/fallingearth/textures/entity/meteor.png");
         float f3 = MathHelper.sin(f2 * 0.2F) / 2.0F + 0.5F;
         f3 += f3 * f3;
         this.field_76995_b.render(par1EntityMeteor, 0.0F, f2 * 3.0F, f3 * 0.2F, 0.0F, 0.0F, 0.0625F);

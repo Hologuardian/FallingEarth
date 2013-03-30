@@ -37,8 +37,8 @@ public class EntityMeteor extends EntityThrowable
 		this(par1World, par2, par6);
 		this.size = s;
         this.setSize(s, s);
-        this.motionX = this.rand.nextGaussian() - 0.5F;
-        this.motionZ = this.rand.nextGaussian() - 0.5F;
+//        this.motionX = this.rand.nextGaussian() - 0.5F;
+//        this.motionZ = this.rand.nextGaussian() - 0.5F;
         this.renderDistanceWeight = 12;
 	}
 	
@@ -51,11 +51,6 @@ public class EntityMeteor extends EntityThrowable
     {
         return true;
     }
-
-    /**
-     * Makes the entity despawn if requirements are reached
-     */
-    protected void despawnEntity() {}
 
     /**
      * Called to update the entity's position/logic.
@@ -74,7 +69,7 @@ public class EntityMeteor extends EntityThrowable
     
     protected float getGravityVelocity()
     {
-        return 0.01F;
+        return 0.00F;
     }
 
 	@Override

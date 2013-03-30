@@ -10,15 +10,36 @@ public class ConfigHelper
 {
 	public static int MeteorStoneID;
 	public static int MeteorSpawnerID;
+
+	public static int MeteoriticSwordID;
+	public static int MeteoriticAxeID;
+	public static int MeteoriticShovelID;
+	public static int MeteoriticPickaxeID;
+	public static int MeteoriticHoeID;
+
+	public static int RisePlateID;
+	public static int FlameTrapID;
+	public static int MeteoriteSpawnerID;
+	public static int MeteorSpawnSpawnerID;
 	
 	public static void init(FMLPreInitializationEvent event)
 	{
 		File file = new File(event.getModConfigurationDirectory(), "FallingEarth.cfg");
 		Configuration config = new Configuration(file);
 		config.load();
-		MeteorStoneID = config.getBlock("MeteorStone", 3200).getInt();
+		int bID = 3199;
+		MeteorStoneID = config.getBlock("MeteorStone", bID++).getInt();
+		RisePlateID = config.getBlock("RisePlate", bID++).getInt();
+		FlameTrapID = config.getBlock("FlameTrap", bID++).getInt();
 
-		MeteorSpawnerID = config.getItem("MeteorSpawner", 5500).getInt();
+		int iID = 5499;
+		MeteorSpawnerID = config.getItem("MeteorSpawner", iID++).getInt();
+		
+		MeteoriticSwordID = config.getItem("MeteoriticSword", iID++).getInt();
+		MeteoriticAxeID = config.getItem("MeteoriticAxe", iID++).getInt();
+		MeteoriticShovelID = config.getItem("MeteoriticShovel", iID++).getInt();
+		MeteoriticPickaxeID = config.getItem("MeteoriticPickaxe", iID++).getInt();
+		MeteoriticHoeID = config.getItem("MeteoriticHoe", iID++).getInt();
 		config.save();
 	}
 }
