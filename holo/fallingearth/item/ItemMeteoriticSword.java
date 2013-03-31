@@ -2,6 +2,7 @@ package holo.fallingearth.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,6 @@ public class ItemMeteoriticSword extends ItemSword
     public ItemMeteoriticSword(int var1, EnumToolMaterial var2)
     {
         super(var1, var2);
-        this.maxStackSize = 1;
         this.setMaxDamage(-1);
         this.weaponDamage = 12;
     }
@@ -43,22 +43,6 @@ public class ItemMeteoriticSword extends ItemSword
         return weaponDamage;
     }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
-    public boolean isFull3D()
-    {
-        return true;
-    }
-
-    /**
-     * returns the action that specifies what animation to play when the items is being used
-     */
-    public EnumAction getItemUseAction(ItemStack var1)
-    {
-        return EnumAction.block;
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
 
@@ -67,10 +51,16 @@ public class ItemMeteoriticSword extends ItemSword
      */
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
+    	par3List.add("12 Melee Damage");
     	par3List.add("Lifesteal II");
     	par3List.add("Burn IV");
-    	par3List.add("12 Melee Damage");
     	par3List.add("Infinite Uses");
     	
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void updateIcons(IconRegister par1IconRegister)
+    {
+        this.iconIndex = par1IconRegister.registerIcon("FallingEarth:MeteoriticSword");
     }
 }

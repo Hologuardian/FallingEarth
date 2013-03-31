@@ -4,11 +4,13 @@ import holo.fallingearth.FallingEarth;
 import holo.fallingearth.entity.meteor.EntityMeteor;
 import holo.fallingearth.entity.mob.EntityMeteorSpawn;
 import holo.fallingearth.entity.mob.EntityMeteorite;
+import holo.fallingearth.util.handler.ArmorAbilityHandler;
 import holo.fallingearth.util.handler.ServerTickHandler;
 import holo.fallingearth.util.helper.BlockHelper;
 import holo.fallingearth.util.helper.ConfigHelper;
 import holo.fallingearth.util.helper.ItemHelper;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -36,7 +38,7 @@ public class CommonProxy {
 	}
 	
 	public void eventRegistry() {
-		//MinecraftForge.EVENT_BUS.register(new ArmorEffectHandler());
+		MinecraftForge.EVENT_BUS.register(new ArmorAbilityHandler());
 	}
 	
 	public void entityRegistry() {
@@ -46,7 +48,7 @@ public class CommonProxy {
 	}
 	
 	public void registerEntity(Class<? extends Entity> clazz, String name, int modID, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
-		EntityRegistry.registerGlobalEntityID(clazz, name, availableID());
+		EntityRegistry.registerGlobalEntityID(clazz, name, availableID(),  000000, 255255255);
 		EntityRegistry.registerModEntity(clazz, name, modID, FallingEarth.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
 	}
 	

@@ -1,6 +1,7 @@
 package holo.fallingearth.item;
 
 import holo.fallingearth.entity.meteor.EntityMeteor;
+import holo.fallingearth.util.handler.MeteorDropHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
@@ -22,10 +23,7 @@ public class ItemMeteorSpawner extends Item
      */
     public ItemStack onItemRightClick(ItemStack par1, World par2, EntityPlayer par3)
     {
-        if (!par2.isRemote)
-        {
-        	par2.spawnEntityInWorld(new EntityMeteor(par2, par3.posX, par3.posZ, 10));
-        }
+        MeteorDropHandler.DropMeteor(par2, par3, 40);
 
         return par1;
     }

@@ -72,7 +72,7 @@ public class EntityMeteor extends EntityThrowable
     
     protected float getGravityVelocity()
     {
-        return 0.00F;
+        return 0.01F;
     }
 
 	@Override

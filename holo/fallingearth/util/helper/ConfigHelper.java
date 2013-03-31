@@ -17,10 +17,17 @@ public class ConfigHelper
 	public static int MeteoriticPickaxeID;
 	public static int MeteoriticHoeID;
 
+	public static int MeteoriticHeadID;
+	public static int MeteoriticBodyID;
+	public static int MeteoriticLegsID;
+	public static int MeteoriticBootsID;
+
 	public static int RisePlateID;
 	public static int FlameTrapID;
 	public static int MeteoriteSpawnerID;
 	public static int MeteorSpawnSpawnerID;
+
+	public static int MeteoriticEssenceID;
 	
 	public static void init(FMLPreInitializationEvent event)
 	{
@@ -40,6 +47,13 @@ public class ConfigHelper
 		MeteoriticShovelID = config.getItem("MeteoriticShovel", iID++).getInt();
 		MeteoriticPickaxeID = config.getItem("MeteoriticPickaxe", iID++).getInt();
 		MeteoriticHoeID = config.getItem("MeteoriticHoe", iID++).getInt();
+
+		MeteoriticHeadID = config.getItem("MeteoriticHead", iID++).getInt();
+		MeteoriticBodyID = config.getItem("MeteoriticBody", iID++).getInt();
+		MeteoriticLegsID = config.getItem("MeteoriticLegs", iID++).getInt();
+		MeteoriticBootsID = config.getItem("MeteoriticBoots", iID++).getInt();
+
+		MeteoriticEssenceID = config.getItem("MeteoriticEssence", iID++).getInt();
 		config.save();
 	}
 }

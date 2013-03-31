@@ -22,6 +22,14 @@ public class EntityMeteorSpawn extends EntityMob
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 64.0F, 0, true));
 	}
 
+    /**
+     * Returns true if the newer Entity AI code should be run
+     */
+    public boolean isAIEnabled()
+    {
+        return true;
+    }
+
 	@Override
 	public int getMaxHealth() 
 	{

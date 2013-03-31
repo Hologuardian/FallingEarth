@@ -1,5 +1,7 @@
 package holo.fallingearth.util.handler;
 
+import holo.fallingearth.util.helper.ItemHelper;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -36,25 +38,47 @@ public class ServerTickHandler implements ITickHandler
 
 	public void onTickInGame()
 	{
-		int ticks = MinecraftServer.getServer().getTickCounter();
 		Iterator players = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
 		
 		while(players.hasNext())
 		{
 			EntityPlayerMP player = (EntityPlayerMP) players.next();
 			
-			if ((ticks & 24000) >= 12000 && ticks > 72000 && player.getRNG().nextInt(12000) == 0)
+			long ticks = player.worldObj.getTotalWorldTime();
+			long time = player.worldObj.getWorldTime();
+			
+			if (time >= 13000 && ticks <= 23000 && ticks > 72000 && player.getRNG().nextInt(3600) == 0)
 			{
 				MeteorDropHandler.DropMeteor(player.worldObj, player, 40);
+				player.sendChatToPlayer("Dropping large meteor");
 			}
-			else if ((ticks & 24000) >= 12000 && player.getRNG().nextInt(1500) == 0)
+			else if (time >= 13000 && ticks <= 23000 && player.getRNG().nextInt(600) == 0)
 			{
 				MeteorDropHandler.DropMeteor(player.worldObj, player, 10);
+				player.sendChatToPlayer("Dropping small meteor");
 			}
-//			else if ((ticks & 24000) <= 12000 && player.getRNG().nextInt(1500) == 0)
+//			else if ((ticks % 24000) <= 12000 && player.getRNG().nextInt(1500) == 0)
 //			{
 //				MeteorDropHandler.DropComet(player.worldObj, player, 10);
+//			player.sendChatToPlayer("Dropping comet");
 //			}
+			
+			ItemStack boots = player.inventory.armorInventory[0];
+			ItemStack legs = player.inventory.armorInventory[1];
+			ItemStack chest = player.inventory.armorInventory[2];
+			ItemStack helm = player.inventory.armorInventory[3];
+
+			if (boots == null || legs == null || chest == null || helm == null)
+			{
+				continue;
+			}
+			else if (boots.itemID == ItemHelper.meteoriticBoots.itemID
+					&& legs.itemID == ItemHelper.meteoriticLegs.itemID
+					&& chest.itemID == ItemHelper.meteoriticBody.itemID
+					&& helm.itemID == ItemHelper.meteoriticHead.itemID)
+			{
+				player.fallDistance = 0;
+			}
 		}
 	}
 }
