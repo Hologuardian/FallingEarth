@@ -28,7 +28,7 @@ public class ServerTickHandler implements ITickHandler
 	{
 		return EnumSet.of(TickType.SERVER);
 	}
-
+	
 	public String getLabel()
 	{
 		return "Falling Earth Server Tick Handler";
@@ -36,10 +36,25 @@ public class ServerTickHandler implements ITickHandler
 
 	public void onTickInGame()
 	{
-		//int ticks = MinecraftServer.getServer().getTickCounter();
-		//if ((ticks & 24000) == 12000 && ticks > 72000)
-		//{
-		//	MeteorDropHandler.DropMeteor(1);
-		//}
+		int ticks = MinecraftServer.getServer().getTickCounter();
+		Iterator players = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
+		
+		while(players.hasNext())
+		{
+			EntityPlayerMP player = (EntityPlayerMP) players.next();
+			
+			if ((ticks & 24000) >= 12000 && ticks > 72000 && player.getRNG().nextInt(12000) == 0)
+			{
+				MeteorDropHandler.DropMeteor(player.worldObj, player, 40);
+			}
+			else if ((ticks & 24000) >= 12000 && player.getRNG().nextInt(1500) == 0)
+			{
+				MeteorDropHandler.DropMeteor(player.worldObj, player, 10);
+			}
+//			else if ((ticks & 24000) <= 12000 && player.getRNG().nextInt(1500) == 0)
+//			{
+//				MeteorDropHandler.DropComet(player.worldObj, player, 10);
+//			}
+		}
 	}
 }

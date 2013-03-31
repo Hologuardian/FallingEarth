@@ -36,12 +36,15 @@ public class EntityMeteor extends EntityThrowable
 	{
 		this(par1World, par2, par6);
 		this.size = s;
-        this.setSize(s, s);
-//        this.motionX = this.rand.nextGaussian() - 0.5F;
-//        this.motionZ = this.rand.nextGaussian() - 0.5F;
+		this.setSize(2.0F, 2.0F);
         this.renderDistanceWeight = 12;
 	}
 	
+	public void setDirection(double x, double z)
+	{
+		this.motionX = x;
+		this.motionZ = z;
+	}
 
     /**
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge

@@ -2,6 +2,9 @@ package holo.fallingearth.util.proxy;
 
 import holo.fallingearth.FallingEarth;
 import holo.fallingearth.entity.meteor.EntityMeteor;
+import holo.fallingearth.entity.mob.EntityMeteorSpawn;
+import holo.fallingearth.entity.mob.EntityMeteorite;
+import holo.fallingearth.util.handler.ServerTickHandler;
 import holo.fallingearth.util.helper.BlockHelper;
 import holo.fallingearth.util.helper.ConfigHelper;
 import holo.fallingearth.util.helper.ItemHelper;
@@ -9,6 +12,8 @@ import net.minecraft.entity.Entity;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class CommonProxy {
 	
@@ -24,7 +29,7 @@ public class CommonProxy {
 	}
 	
 	public void tickRegistry() {
-		//TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);	
+		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);	
 	}
 	
 	public void renderRegistry() {
@@ -36,8 +41,8 @@ public class CommonProxy {
 	
 	public void entityRegistry() {
 		registerEntity(EntityMeteor.class, "FallingEarth_Meteor", START_EID++, 64, 10, true);
-		registerEntity(EntityMeteor.class, "FallingEarth_Meteorite", START_EID++, 64, 10, true);
-		registerEntity(EntityMeteor.class, "FallingEarth_MeteorSpawn", START_EID++, 64, 10, true);
+		registerEntity(EntityMeteorite.class, "FallingEarth_Meteorite", START_EID++, 64, 10, true);
+		registerEntity(EntityMeteorSpawn.class, "FallingEarth_MeteorSpawn", START_EID++, 64, 10, true);
 	}
 	
 	public void registerEntity(Class<? extends Entity> clazz, String name, int modID, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
