@@ -22,7 +22,12 @@ public class MeteorLandHandler
 				
 				int pY = world.getHeightValue(pX, pZ);
 				if (world.getBlockId(pX, pY - 1, pZ) != BlockHelper.meteorStone.blockID)
+				{
 					world.setBlock(pX, pY, pZ, BlockHelper.meteorStone.blockID);
+					if (world.rand.nextInt(4) == 0)
+						world.setBlock(pX, pY + 1, pZ, Block.fire.blockID);
+				}
+				
 			}
 		
 		for (int fX = -1; fX < 2; fX++)
