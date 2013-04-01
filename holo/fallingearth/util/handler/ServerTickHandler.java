@@ -50,14 +50,14 @@ public class ServerTickHandler implements ITickHandler
 			if (time >= 13000 && time <= 23000 && ticks > 72000 && player.getRNG().nextInt(3600) == 0)
 			{
 				MeteorDropHandler.DropMeteor(player.worldObj, player, 40);
-				player.sendChatToPlayer("Dropping large meteor");
+				player.sendChatToPlayer("A large meteor is approaching your position!");
 			}
 			else if (time >= 13000 && time <= 23000 && player.getRNG().nextInt(600) == 0)
 			{
 				MeteorDropHandler.DropMeteor(player.worldObj, player, 10);
-				player.sendChatToPlayer("Dropping small meteor");
+				player.sendChatToPlayer("A small meteor is approaching your position!");
 			}
-//			else if ((ticks % 24000) <= 12000 && player.getRNG().nextInt(1500) == 0)
+//			else if ((ticks % 24000) <= 12000 && player.getRNG().nextInt(1500) == 0) Didn't have time =(
 //			{
 //				MeteorDropHandler.DropComet(player.worldObj, player, 10);
 //			player.sendChatToPlayer("Dropping comet");

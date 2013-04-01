@@ -15,7 +15,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ItemHelper 
 {
-	public static Item meteorSpawner;
+//	public static Item meteorSpawner; DEBUG ONLY
 	public static Item meteoriticPickaxe;
 	public static Item meteoriticAxe;
 	public static Item meteoriticShovel;
@@ -30,7 +30,7 @@ public class ItemHelper
 
 	public static void initItems()
 	{
-		meteorSpawner = new ItemMeteorSpawner(ConfigHelper.MeteorSpawnerID).setUnlocalizedName("MeteorSpawner");
+		//meteorSpawner = new ItemMeteorSpawner(ConfigHelper.MeteorSpawnerID).setUnlocalizedName("MeteorSpawner");
 
 		EnumToolMaterial meteor = EnumHelper.addToolMaterial("Meteoritic", 3, -1, 16, 14, 30);
 		meteoriticPickaxe = new ItemMeteoriticPickaxe(ConfigHelper.MeteoriticPickaxeID, meteor).setUnlocalizedName("MeteoriticPickaxe");

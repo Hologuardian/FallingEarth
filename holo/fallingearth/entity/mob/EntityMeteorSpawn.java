@@ -49,7 +49,40 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 		super.onUpdate();
 		innerRotation++;
 	}
-	
+
+	/**
+	 * Returns the sound this mob makes while it's alive.
+	 */
+	protected String getLivingSound()
+	{
+		return "";
+	}
+
+	/**
+	 * Returns the sound this mob makes when it is hurt.
+	 */
+	protected String getHurtSound()
+	{
+		return "mob.blaze.hit";
+	}
+
+	/**
+	 * Returns the sound this mob makes on death.
+	 */
+	protected String getDeathSound()
+	{
+		return "mob.blaze.breathe";
+	}
+
+	public float getSoundPitch()
+	{
+		return 0.08F;
+	}
+
+	public float getSoundVolume()
+	{
+		return 3.0F;
+	}	
 	
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.

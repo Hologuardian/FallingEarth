@@ -76,7 +76,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 */
 	protected String getLivingSound()
 	{
-		return "mob.blaze.breathe";
+		return "";
 	}
 
 	/**
@@ -92,7 +92,17 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 */
 	protected String getDeathSound()
 	{
-		return "mob.blaze.death";
+		return "mob.blaze.breathe";
+	}
+
+	public float getSoundPitch()
+	{
+		return 0.08F;
+	}
+
+	public float getSoundVolume()
+	{
+		return 3.0F;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -160,7 +170,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 */
 	protected int getDropItemId()
 	{
-		return Item.blazeRod.itemID;
+		return 0;
 	}
 
 	/**
