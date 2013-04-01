@@ -8,8 +8,8 @@ public class LanguageHelper
 	{
 		LanguageRegistry.addName(ItemHelper.meteoriticSword, "Meteoritic Sword");
 		LanguageRegistry.addName(ItemHelper.meteoriticShovel, "Meteoritic Shovel");
-		LanguageRegistry.addName(ItemHelper.meteoriticPickaxe, "Meteoritic Axe");
-		LanguageRegistry.addName(ItemHelper.meteoriticAxe, "Meteoritic Pickaxe");
+		LanguageRegistry.addName(ItemHelper.meteoriticPickaxe, "Meteoritic Pickaxe");
+		LanguageRegistry.addName(ItemHelper.meteoriticAxe, "Meteoritic Axe");
 		LanguageRegistry.addName(ItemHelper.meteoriticHead, "Meteoritic Helmet");
 		LanguageRegistry.addName(ItemHelper.meteoriticBody, "Meteoritic Chestplate");
 		LanguageRegistry.addName(ItemHelper.meteoriticLegs, "Meteoritic Legs");
