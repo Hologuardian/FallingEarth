@@ -31,7 +31,8 @@ public class BlockHelper
 	{
 		GameRegistry.registerBlock(meteorStone, "Meteor Stone");
 		GameRegistry.registerBlock(risePlate, "Rise Plate");
+		
 		GameRegistry.registerBlock(meteoriteSpawner, "Meteorite Spawner");
-		GameRegistry.registerBlock(risePlate, "Meteor Spawn Spawner");
+		GameRegistry.registerBlock(meteorSpawnSpawner, "Meteor Spawn Spawner");
 	}
 }

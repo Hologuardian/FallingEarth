@@ -11,8 +11,8 @@ public class MeteorLandHandler
 	public static void land(World world, double eX, double eY, double eZ, int s)
 	{
 		int x = MathHelper.floor_double(eX);
-		int y = MathHelper.floor_double(eY);
 		int z = MathHelper.floor_double(eZ);
+		int y = world.getHeightValue(x, z);
 
 		for(float i = 0; i < s; i += 0.5)
 			for(float j = 0; j < Math.PI * 2; j += ((Math.PI / 8) + world.rand.nextFloat()))
@@ -34,5 +34,8 @@ public class MeteorLandHandler
 			for (int fZ = -1; fZ < 2; fZ++)
 				for (int fY = 0; fY < 3; fY++)
 					world.setBlock(x + fX, world.getHeightValue(x + fX, z + fZ), z + fZ, BlockHelper.meteorStone.blockID);
+
+		world.setBlock(x, y + 3, z, BlockHelper.meteoriteSpawner.blockID);
+		world.setBlock(x, y, z, BlockHelper.meteorSpawnSpawner.blockID);
 	}
 }

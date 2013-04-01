@@ -5,6 +5,7 @@ import holo.fallingearth.util.helper.ItemHelper;
 import java.util.Random;
 
 import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
@@ -16,6 +17,7 @@ public class BlockMeteoriteSpawner extends BlockMobSpawner
     public BlockMeteoriteSpawner(int par1)
     {
         super(par1);
+        this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
     /**
@@ -24,7 +26,8 @@ public class BlockMeteoriteSpawner extends BlockMobSpawner
     public TileEntity createNewTileEntity(World par1World)
     {
     	TileEntityMobSpawner var1 = new TileEntityMobSpawner();
-    	var1.func_98049_a().setMobID("FallingEarth.FallingEarth_Meteorite");
+    	var1.func_98049_a().setMobID("FallingEarth_Meteorite");
+    	var1.func_98049_a().field_98286_b = 0;
         return var1;
     }
 

@@ -31,15 +31,17 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	public EntityMeteorSpawn(World par1World) {
 		super(par1World);
 		this.stepHeight = 3.1F;
-		this.moveSpeed = 0.2F;
+		this.moveSpeed = 0.25F;
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
         this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
 		this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 32.0F));
 		this.tasks.addTask(7, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 64.0F, 0, true));
+		this.experienceValue = 80;
+		this.isImmuneToFire = true;
 	}
 	
 	public void onUpdate()
@@ -81,6 +83,14 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	{
 		return innerRotation;
 	}
+
+	/**
+	 * Checks to make sure the light is not too bright where the mob is spawning
+	 */
+	 protected boolean isValidLightLevel()
+	 {
+		 return true;
+	 }
 
 	public boolean attackEntityAsMob(Entity par1Entity)
     {

@@ -30,7 +30,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/** ticks until heightOffset is randomized */
 	private int heightOffsetUpdateTime;
 	private int field_70846_g;
-	EntityAIArrowAttack ranged = new EntityAIArrowAttack(this, 0.25F, 20, 60, 64.0F);
+	EntityAIArrowAttack ranged = new EntityAIArrowAttack(this, 0.25F, 20, 240, 64.0F);
 	EntityAIWander wander = new EntityAIWander(this, this.moveSpeed);
 
 	private int innerRotation;
@@ -48,7 +48,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 64.0F, 0, true));
 		this.isImmuneToFire = true;
-		this.experienceValue = 10;
+		this.experienceValue = 80;
         this.innerRotation = this.rand.nextInt(100000);
 	}
 
