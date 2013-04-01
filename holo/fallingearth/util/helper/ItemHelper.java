@@ -40,10 +40,10 @@ public class ItemHelper
 
 		int meteoriticArmor = RenderingRegistry.addNewArmourRendererPrefix("FallingEarth:Meteor");
 		EnumArmorMaterial meteoritic = EnumHelper.addArmorMaterial("Meteoritic", -1, new int[]{0,0,0,0}, 30);
-		meteoriticHead = new ItemMeteoriticArmor(ConfigHelper.MeteoriticHeadID, meteoritic, meteoriticArmor, 0).setUnlocalizedName("MeteoriticHead");
-		meteoriticBody = new ItemMeteoriticArmor(ConfigHelper.MeteoriticBodyID, meteoritic, meteoriticArmor, 1).setUnlocalizedName("MeteoriticBody");
-		meteoriticLegs = new ItemMeteoriticArmor(ConfigHelper.MeteoriticLegsID, meteoritic, meteoriticArmor, 2).setUnlocalizedName("MeteoriticLegs");
-		meteoriticBoots = new ItemMeteoriticArmor(ConfigHelper.MeteoriticBootsID, meteoritic, meteoriticArmor, 3).setUnlocalizedName("MeteoriticBoots");
+		meteoriticHead = new ItemMeteoriticArmor(ConfigHelper.MeteoriticHeadID, meteoritic, meteoriticArmor, 0).setUnlocalizedName("FallingEarth:MeteoriticHelmet");
+		meteoriticBody = new ItemMeteoriticArmor(ConfigHelper.MeteoriticBodyID, meteoritic, meteoriticArmor, 1).setUnlocalizedName("FallingEarth:MeteoriticBody");
+		meteoriticLegs = new ItemMeteoriticArmor(ConfigHelper.MeteoriticLegsID, meteoritic, meteoriticArmor, 2).setUnlocalizedName("FallingEarth:MeteoriticLegs");
+		meteoriticBoots = new ItemMeteoriticArmor(ConfigHelper.MeteoriticBootsID, meteoritic, meteoriticArmor, 3).setUnlocalizedName("FallingEarth:MeteoriticBoots");
 
 		meteoriticEssence = new MeteoriticEssence(ConfigHelper.MeteoriticEssenceID).setUnlocalizedName("MeteoriticEssence");
 	}

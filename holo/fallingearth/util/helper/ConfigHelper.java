@@ -38,6 +38,8 @@ public class ConfigHelper
 		MeteorStoneID = config.getBlock("MeteorStone", bID++).getInt();
 		RisePlateID = config.getBlock("RisePlate", bID++).getInt();
 		FlameTrapID = config.getBlock("FlameTrap", bID++).getInt();
+		MeteoriteSpawnerID = config.getBlock("MeteoriteSpawner", bID++).getInt();
+		MeteorSpawnSpawnerID = config.getBlock("MeteorSpawnSpawner", bID++).getInt();
 
 		int iID = 5499;
 		MeteorSpawnerID = config.getItem("MeteorSpawner", iID++).getInt();

@@ -9,6 +9,7 @@ import holo.fallingearth.util.handler.ServerTickHandler;
 import holo.fallingearth.util.helper.BlockHelper;
 import holo.fallingearth.util.helper.ConfigHelper;
 import holo.fallingearth.util.helper.ItemHelper;
+import holo.fallingearth.util.helper.LanguageHelper;
 import holo.fallingearth.util.helper.RecipeHelper;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +31,7 @@ public class CommonProxy {
 		BlockHelper.initBlocks();
 		renderRegistry();
 		RecipeHelper.initRecipes();
+		LanguageHelper.initNames();
 	}
 	
 	public void tickRegistry() {
