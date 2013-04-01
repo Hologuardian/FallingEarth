@@ -1,5 +1,6 @@
 package holo.fallingearth.entity.mob;
 
+import holo.fallingearth.entity.projectile.EntityMeteoriteProjectile;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -14,12 +15,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +35,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 		super(par1World);
 		this.texture = "/mob/fire.png";
 		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(4, new EntityAIArrowAttack(this, 0.25F, 20, 10, 64.0F));
+		this.tasks.addTask(4, new EntityAIArrowAttack(this, 0.25F, 20, 60, 64.0F));
 		this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed));
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
@@ -272,13 +269,13 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 	  */
 	 public int getAttackStrength(Entity par1Entity)
 	 {
-		 return 6;
+		 return 18;
 	 }
 
 	 @Override
 	 public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving, float par2) 
 	 {
-	        EntityArrow entityarrow = new EntityArrow(this.worldObj, this, par1EntityLiving, 0.6F, (float)(14 - this.worldObj.difficultySetting * 4));
+	        EntityMeteoriteProjectile entityarrow = new EntityMeteoriteProjectile(this.worldObj, this, par1EntityLiving, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4));
 	        int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
 	        int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
 	        entityarrow.setDamage((double)(par2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting * 0.11F));

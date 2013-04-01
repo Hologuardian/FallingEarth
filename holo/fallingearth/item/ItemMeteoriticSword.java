@@ -21,7 +21,7 @@ public class ItemMeteoriticSword extends ItemSword
     {
         super(var1, var2);
         this.setMaxDamage(-1);
-        this.weaponDamage = 12;
+        this.weaponDamage = 8;
     }
 
     /**
@@ -51,11 +51,8 @@ public class ItemMeteoriticSword extends ItemSword
      */
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
-    	par3List.add("12 Melee Damage");
-    	par3List.add("Lifesteal II");
+    	par3List.add("22 Melee Damage");
     	par3List.add("Burn IV");
-    	par3List.add("Infinite Uses");
-    	
     }
 
     @SideOnly(Side.CLIENT)

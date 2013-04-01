@@ -47,12 +47,12 @@ public class ServerTickHandler implements ITickHandler
 			long ticks = player.worldObj.getTotalWorldTime();
 			long time = player.worldObj.getWorldTime();
 			
-			if (time >= 13000 && ticks <= 23000 && ticks > 72000 && player.getRNG().nextInt(3600) == 0)
+			if (time >= 13000 && time <= 23000 && ticks > 72000 && player.getRNG().nextInt(3600) == 0)
 			{
 				MeteorDropHandler.DropMeteor(player.worldObj, player, 40);
 				player.sendChatToPlayer("Dropping large meteor");
 			}
-			else if (time >= 13000 && ticks <= 23000 && player.getRNG().nextInt(600) == 0)
+			else if (time >= 13000 && time <= 23000 && player.getRNG().nextInt(600) == 0)
 			{
 				MeteorDropHandler.DropMeteor(player.worldObj, player, 10);
 				player.sendChatToPlayer("Dropping small meteor");

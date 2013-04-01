@@ -23,7 +23,7 @@ public class ItemMeteoriticArmor extends ItemArmor implements IArmorTextureProvi
 
     public ArmorProperties getProperties(EntityLiving var1, ItemStack var2, DamageSource var3, double var4, int var6)
     {
-        return new ISpecialArmor.ArmorProperties(0, 0.225D, 50000);
+        return new ISpecialArmor.ArmorProperties(0, 0.2D, 50000);
     }
 
     public int getArmorDisplay(EntityPlayer var1, ItemStack var2, int var3)
@@ -41,7 +41,7 @@ public class ItemMeteoriticArmor extends ItemArmor implements IArmorTextureProvi
      */
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
     {
-        par3List.add("22.5% Damage Reduction Per Peice");
+        par3List.add("20% Damage Reduction Per Peice");
         par3List.add("Infinite Uses");
         par3List.add("Full Set: 3x Jump");
         par3List.add("Full set: Fall Damage Protection");

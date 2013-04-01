@@ -1,6 +1,7 @@
 package holo.fallingearth.item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -67,6 +68,19 @@ public class ItemMeteoriticShovel extends ItemSpade
 		
 		return smelted;
 	}
+
+    @Override
+    @SideOnly(Side.CLIENT)
+
+    /**
+     * allows items to add custom lines of information to the mouseover description
+     */
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {
+    	par3List.add("Double Drops");
+    	par3List.add("Auto-Smelting");
+    }
+
 
     @SideOnly(Side.CLIENT)
     public void updateIcons(IconRegister par1IconRegister)

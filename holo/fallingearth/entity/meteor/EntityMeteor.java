@@ -39,6 +39,20 @@ public class EntityMeteor extends EntityThrowable
 		this.setSize(2.0F, 2.0F);
         this.renderDistanceWeight = 12;
 	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBrightnessForRender(float par1)
+	{
+		return 15728880;
+	}
+
+	/**
+	 * Gets how bright this entity is.
+	 */
+	public float getBrightness(float par1)
+	{
+		return 1.0F;
+	}
 	
 	public void setDirection(double x, double z)
 	{

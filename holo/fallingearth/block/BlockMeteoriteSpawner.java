@@ -16,8 +16,6 @@ public class BlockMeteoriteSpawner extends BlockMobSpawner
     public BlockMeteoriteSpawner(int par1)
     {
         super(par1);
-        this.setBlockUnbreakable();
-        this.setResistance(600000F);
     }
 
     /**
