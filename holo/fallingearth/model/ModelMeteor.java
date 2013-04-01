@@ -18,9 +18,9 @@ public class ModelMeteor extends ModelBase
     /** The glass model for the Ender Crystal. */
     private ModelRenderer glass = new ModelRenderer(this, "glass");
 
-	private final int size;
+	private final float size;
 
-    public ModelMeteor(float par1, boolean par2, int par3)
+    public ModelMeteor(float par1, boolean par2, float par3)
     {
         this.glass.setTextureOffset(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8, 8, 8);
         this.cube = new ModelRenderer(this, "cube");

@@ -1,5 +1,6 @@
 package holo.fallingearth.entity.mob;
 
+import holo.fallingearth.entity.meteor.IEntityMeteorSpinning;
 import holo.fallingearth.entity.projectile.EntityMeteoriteProjectile;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMeteorite extends EntityMob implements IRangedAttackMob
+public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEntityMeteorSpinning
 {
 	/** Random offset used in floating behaviour */
 	private float heightOffset = 0.5F;
@@ -29,20 +30,26 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 	/** ticks until heightOffset is randomized */
 	private int heightOffsetUpdateTime;
 	private int field_70846_g;
+	EntityAIArrowAttack ranged = new EntityAIArrowAttack(this, 0.25F, 20, 60, 64.0F);
+	EntityAIWander wander = new EntityAIWander(this, this.moveSpeed);
 
+	private int innerRotation;
+	
 	public EntityMeteorite(World par1World)
 	{
 		super(par1World);
-		this.texture = "/mob/fire.png";
 		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(4, new EntityAIArrowAttack(this, 0.25F, 20, 60, 64.0F));
-		this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed));
+		ranged.setMutexBits(3);
+		wander.setMutexBits(3);
+		this.tasks.addTask(4, ranged);
+		this.tasks.addTask(5, wander);
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(6, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 64.0F, 0, true));
 		this.isImmuneToFire = true;
 		this.experienceValue = 10;
+        this.innerRotation = this.rand.nextInt(100000);
 	}
 
 	/**
@@ -55,7 +62,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 
 	public int getMaxHealth()
 	{
-		return 20;
+		return 12;
 	}
 
 	protected void entityInit()
@@ -108,6 +115,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 	 */
 	public void onLivingUpdate()
 	{
+		innerRotation++;
 		if (!this.worldObj.isRemote)
 		{
 			if (this.isWet())
@@ -134,68 +142,13 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 			this.motionY *= 0.6D;
 		}
 
-		for (int i = 0; i < 2; ++i)
+		if (this.rand.nextInt(3) == 0)
 		{
 			this.worldObj.spawnParticle("largesmoke", this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
 		}
 
 		super.onLivingUpdate();
 	}
-
-	/**
-	 * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
-	 */
-	// protected void attackEntity(Entity par1Entity, float par2)
-	//	    {
-	//	        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
-	//	        {
-	//	            this.attackTime = 20;
-	//	            this.attackEntityAsMob(par1Entity);
-	//	        }
-	//	        else if (par2 < 30.0F)
-	//	        {
-	//	            double d0 = par1Entity.posX - this.posX;
-	//	            double d1 = par1Entity.boundingBox.minY + (double)(par1Entity.height / 2.0F) - (this.posY + (double)(this.height / 2.0F));
-	//	            double d2 = par1Entity.posZ - this.posZ;
-	//
-	//	            if (this.attackTime == 0)
-	//	            {
-	//	                ++this.field_70846_g;
-	//
-	//	                if (this.field_70846_g == 1)
-	//	                {
-	//	                    this.attackTime = 60;
-	//	                    this.func_70844_e(true);
-	//	                }
-	//	                else if (this.field_70846_g <= 4)
-	//	                {
-	//	                    this.attackTime = 6;
-	//	                }
-	//	                else
-	//	                {
-	//	                    this.attackTime = 100;
-	//	                    this.field_70846_g = 0;
-	//	                    this.func_70844_e(false);
-	//	                }
-	//
-	//	                if (this.field_70846_g > 1)
-	//	                {
-	//	                    float f1 = MathHelper.sqrt_float(par2) * 0.5F;
-	//	                    this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1009, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
-	//
-	//	                    for (int i = 0; i < 1; ++i)
-	//	                    {
-	//	                        EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.worldObj, this, d0 + this.rand.nextGaussian() * (double)f1, d1, d2 + this.rand.nextGaussian() * (double)f1);
-	//	                        entitysmallfireball.posY = this.posY + (double)(this.height / 2.0F) + 0.5D;
-	//	                        this.worldObj.spawnEntityInWorld(entitysmallfireball);
-	//	                    }
-	//	                }
-	//	            }
-	//
-	//	            this.rotationYaw = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-	//	            this.hasAttacked = true;
-	//	        }
-	//	    }
 
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
@@ -285,4 +238,9 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob
 	        this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
 	        this.worldObj.spawnEntityInWorld(entityarrow);
 	 }
+
+	@Override
+	public int getInnerRotation() {
+		return innerRotation;
+	}
 }

@@ -1,7 +1,11 @@
 package holo.fallingearth.util.proxy;
 
 import holo.fallingearth.entity.meteor.EntityMeteor;
+import holo.fallingearth.entity.mob.EntityMeteorSpawn;
+import holo.fallingearth.entity.mob.EntityMeteorite;
 import holo.fallingearth.render.RenderMeteor;
+import holo.fallingearth.render.RenderMeteorSpawn;
+import holo.fallingearth.render.RenderMeteorite;
 import holo.fallingearth.util.handler.ClientTickHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -20,6 +24,8 @@ public class ClientProxy extends CommonProxy {
 	public void renderRegistry() 
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntityMeteor.class, new RenderMeteor());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMeteorite.class, new RenderMeteorite());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMeteorSpawn.class, new RenderMeteorSpawn());
 	}
 
 }

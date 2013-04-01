@@ -13,12 +13,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderMeteorite extends Render
+public class RenderMeteorSpawn extends Render
 {
     private int field_76996_a = -1;
     private ModelBase field_76995_b;
 
-    public RenderMeteorite()
+    public RenderMeteorSpawn()
     {
         this.shadowSize = 0.5F;
     }
@@ -37,7 +37,7 @@ public class RenderMeteorite extends Render
         float f2 = (float)par1EntityMeteor.getInnerRotation() + par9;
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
-        this.loadTexture("/mods/FallingEarth/textures/entity/meteorite.png");
+        this.loadTexture("/mods/FallingEarth/textures/entity/MeteorSpawn.png");
         float f3 = MathHelper.sin(f2 * 0.2F) / 2.0F + 0.5F;
         f3 += f3 * f3;
         this.field_76995_b.render((Entity) par1EntityMeteor, 0.0F, f2 * 3.0F, f3 * 0.2F, 0.0F, 0.0F, 0.0625F);
