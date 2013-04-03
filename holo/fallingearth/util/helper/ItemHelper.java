@@ -1,5 +1,6 @@
 package holo.fallingearth.util.helper;
 
+import holo.fallingearth.FallingEarth;
 import holo.fallingearth.item.ItemMeteorSpawner;
 import holo.fallingearth.item.ItemMeteoriticArmor;
 import holo.fallingearth.item.ItemMeteoriticAxe;
@@ -15,7 +16,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ItemHelper 
 {
-//	public static Item meteorSpawner; DEBUG ONLY
+	public static Item meteorSpawner;
 	public static Item meteoriticPickaxe;
 	public static Item meteoriticAxe;
 	public static Item meteoriticShovel;
@@ -30,15 +31,15 @@ public class ItemHelper
 
 	public static void initItems()
 	{
-		//meteorSpawner = new ItemMeteorSpawner(ConfigHelper.MeteorSpawnerID).setUnlocalizedName("MeteorSpawner");
+		meteorSpawner = new ItemMeteorSpawner(ConfigHelper.MeteorSpawnerID).setUnlocalizedName("MeteorSpawner");
 
 		EnumToolMaterial meteor = EnumHelper.addToolMaterial("Meteoritic", 3, -1, 16, 14, 30);
 		meteoriticPickaxe = new ItemMeteoriticPickaxe(ConfigHelper.MeteoriticPickaxeID, meteor).setUnlocalizedName("MeteoriticPickaxe");
 		meteoriticAxe = new ItemMeteoriticAxe(ConfigHelper.MeteoriticAxeID, meteor).setUnlocalizedName("MeteoriticAxe");
 		meteoriticShovel = new ItemMeteoriticShovel(ConfigHelper.MeteoriticShovelID, meteor).setUnlocalizedName("MeteoriticShovel");
 		meteoriticSword = new ItemMeteoriticSword(ConfigHelper.MeteoriticSwordID, meteor).setUnlocalizedName("MeteoriticSword");
-
-		int meteoriticArmor = RenderingRegistry.addNewArmourRendererPrefix("FallingEarth:Meteor");
+		
+		int meteoriticArmor = FallingEarth.proxy.addArmor("FallingEarth:Meteor");
 		EnumArmorMaterial meteoritic = EnumHelper.addArmorMaterial("Meteoritic", -1, new int[]{0,0,0,0}, 30);
 		meteoriticHead = new ItemMeteoriticArmor(ConfigHelper.MeteoriticHeadID, meteoritic, meteoriticArmor, 0).setUnlocalizedName("FallingEarth:MeteoriticHelmet");
 		meteoriticBody = new ItemMeteoriticArmor(ConfigHelper.MeteoriticBodyID, meteoritic, meteoriticArmor, 1).setUnlocalizedName("FallingEarth:MeteoriticBody");

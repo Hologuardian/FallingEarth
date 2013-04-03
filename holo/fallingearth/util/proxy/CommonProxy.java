@@ -64,4 +64,9 @@ public class CommonProxy {
 	{
 		ConfigHelper.init(event);
 	}
+	
+	public int addArmor(String name)
+	{
+		return 0;
+	}
 }

@@ -27,5 +27,9 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMeteorite.class, new RenderMeteorite());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMeteorSpawn.class, new RenderMeteorSpawn());
 	}
-
+	
+	public int addArmor(String name)
+	{
+		return RenderingRegistry.addNewArmourRendererPrefix(name);
+	}
 }
