@@ -21,8 +21,8 @@ public class FallingEarth
 	public static FallingEarth instance;
 	
 	@SidedProxy
-	(clientSide = "holo.fallingearth.util.proxy.ClientProxy", 
-		serverSide = "holo.fallingearth.util.proxy.CommonProxy")
+	(clientSide = Utils.clientProxy, 
+		serverSide = Utils.commonProxy)
 	public static CommonProxy proxy;
 
 	@PreInit
