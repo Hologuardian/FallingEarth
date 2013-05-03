@@ -12,7 +12,6 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.EnumHelper;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ItemHelper 
 {

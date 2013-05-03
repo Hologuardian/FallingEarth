@@ -2,8 +2,6 @@ package holo.fallingearth.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
@@ -12,7 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.IArmorTextureProvider;
 import net.minecraftforge.common.ISpecialArmor;
-import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMeteoriticArmor extends ItemArmor implements IArmorTextureProvider, ISpecialArmor
 {
@@ -21,16 +20,19 @@ public class ItemMeteoriticArmor extends ItemArmor implements IArmorTextureProvi
         super(var1, var2, var3, var4);
     }
 
+    @Override
     public ArmorProperties getProperties(EntityLiving var1, ItemStack var2, DamageSource var3, double var4, int var6)
     {
         return new ISpecialArmor.ArmorProperties(0, 0.2D, 50000);
     }
 
+    @Override
     public int getArmorDisplay(EntityPlayer var1, ItemStack var2, int var3)
     {
         return var3 != 0 && var3 != 2 ? (var3 == 1 ? 4 : 2) : 3;
     }
 
+    @Override
     public void damageArmor(EntityLiving var1, ItemStack var2, DamageSource var3, int var4, int var5){}
 
     @Override

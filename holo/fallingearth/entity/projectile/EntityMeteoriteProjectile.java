@@ -3,11 +3,8 @@ package holo.fallingearth.entity.projectile;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class EntityMeteoriteProjectile extends EntityArrow 
 {

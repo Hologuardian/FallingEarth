@@ -55,17 +55,20 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
-	public boolean isAIEnabled()
+	@Override
+    public boolean isAIEnabled()
 	{
 		return true;
 	}
 
-	public int getMaxHealth()
+	@Override
+    public int getMaxHealth()
 	{
 		return 12;
 	}
 
-	protected void entityInit()
+	@Override
+    protected void entityInit()
 	{
 		super.entityInit();
 		this.dataWatcher.addObject(16, new Byte((byte)0));
@@ -74,7 +77,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound()
+	@Override
+    protected String getLivingSound()
 	{
 		return "";
 	}
@@ -82,7 +86,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound()
+	@Override
+    protected String getHurtSound()
 	{
 		return "mob.blaze.hit";
 	}
@@ -90,22 +95,26 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
-	protected String getDeathSound()
+	@Override
+    protected String getDeathSound()
 	{
 		return "mob.blaze.breathe";
 	}
 
-	public float getSoundPitch()
+	@Override
+    public float getSoundPitch()
 	{
 		return 0.08F;
 	}
 
-	public float getSoundVolume()
+	@Override
+    public float getSoundVolume()
 	{
 		return 3.0F;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@Override
+    @SideOnly(Side.CLIENT)
 	public int getBrightnessForRender(float par1)
 	{
 		return 15728880;
@@ -114,7 +123,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Gets how bright this entity is.
 	 */
-	public float getBrightness(float par1)
+	@Override
+    public float getBrightness(float par1)
 	{
 		return 1.0F;
 	}
@@ -123,7 +133,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
-	public void onLivingUpdate()
+	@Override
+    public void onLivingUpdate()
 	{
 		innerRotation++;
 		if (!this.worldObj.isRemote)
@@ -141,7 +152,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 				this.heightOffset = 0.5F + (float)this.rand.nextGaussian() * 3.0F;
 			}
 
-			if (this.getEntityToAttack() != null && this.getEntityToAttack().posY + (double)this.getEntityToAttack().getEyeHeight() > this.posY + (double)this.getEyeHeight() + (double)this.heightOffset)
+			if (this.getEntityToAttack() != null && this.getEntityToAttack().posY + this.getEntityToAttack().getEyeHeight() > this.posY + this.getEyeHeight() + this.heightOffset)
 			{
 				this.motionY += (0.30000001192092896D - this.motionY) * 0.30000001192092896D;
 			}
@@ -154,7 +165,7 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 
 		if (this.rand.nextInt(3) == 0)
 		{
-			this.worldObj.spawnParticle("largesmoke", this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+			this.worldObj.spawnParticle("largesmoke", this.posX + (this.rand.nextDouble() - 0.5D) * this.width, this.posY + this.rand.nextDouble() * this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, 0.0D, 0.0D, 0.0D);
 		}
 
 		super.onLivingUpdate();
@@ -163,12 +174,14 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
-	protected void fall(float par1) {}
+	@Override
+    protected void fall(float par1) {}
 
 	/**
 	 * Returns the item ID for the item the mob drops on death.
 	 */
-	protected int getDropItemId()
+	@Override
+    protected int getDropItemId()
 	{
 		return 0;
 	}
@@ -176,7 +189,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Returns true if the entity is on fire. Used by render to add the fire effect on rendering.
 	 */
-	public boolean isBurning()
+	@Override
+    public boolean isBurning()
 	{
 		return this.func_70845_n();
 	}
@@ -185,7 +199,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
 	 * par2 - Level of Looting used to kill this mob.
 	 */
-	protected void dropFewItems(boolean par1, int par2)
+	@Override
+    protected void dropFewItems(boolean par1, int par2)
 	{
 		if (par1)
 		{
@@ -222,7 +237,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	/**
 	 * Checks to make sure the light is not too bright where the mob is spawning
 	 */
-	 protected boolean isValidLightLevel()
+	 @Override
+    protected boolean isValidLightLevel()
 	 {
 		 return true;
 	 }
@@ -230,7 +246,8 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 /**
 	  * Returns the amount of damage a mob should deal.
 	  */
-	 public int getAttackStrength(Entity par1Entity)
+	 @Override
+    public int getAttackStrength(Entity par1Entity)
 	 {
 		 return 18;
 	 }
@@ -238,10 +255,10 @@ public class EntityMeteorite extends EntityMob implements IRangedAttackMob, IEnt
 	 @Override
 	 public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving, float par2) 
 	 {
-	        EntityMeteoriteProjectile entityarrow = new EntityMeteoriteProjectile(this.worldObj, this, par1EntityLiving, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4));
+	        EntityMeteoriteProjectile entityarrow = new EntityMeteoriteProjectile(this.worldObj, this, par1EntityLiving, 1.6F, 14 - this.worldObj.difficultySetting * 4);
 	        int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
 	        int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
-	        entityarrow.setDamage((double)(par2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting * 0.11F));
+	        entityarrow.setDamage(par2 * 2.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
 
 	        entityarrow.setFire(100);
 

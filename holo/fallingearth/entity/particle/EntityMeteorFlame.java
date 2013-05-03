@@ -27,9 +27,10 @@ public class EntityMeteorFlame extends EntityFX
         this.setParticleTextureIndex((int)(Math.random() * 8.0D));
     }
 
+    @Override
     public void renderParticle(Tessellator var1, float var2, float var3, float var4, float var5, float var6, float var7)
     {
-        float var8 = ((float)this.particleAge + var2) / (float)this.particleMaxAge;
+        float var8 = (this.particleAge + var2) / this.particleMaxAge;
         var8 = 1.0F - var8;
         var8 *= var8;
         var8 = 1.0F - var8;
@@ -37,6 +38,7 @@ public class EntityMeteorFlame extends EntityFX
         super.renderParticle(var1, var2, var3, var4, var5, var6, var7);
     }
 
+    @Override
     public int getBrightnessForRender(float var1)
     {
         int var2 = super.getBrightnessForRender(var1);
@@ -58,6 +60,7 @@ public class EntityMeteorFlame extends EntityFX
     /**
      * Gets how bright this entity is.
      */
+    @Override
     public float getBrightness(float var1)
     {
         float var2 = super.getBrightness(var1);
@@ -69,6 +72,7 @@ public class EntityMeteorFlame extends EntityFX
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate()
     {
         this.prevPosX = this.posX;
@@ -76,9 +80,9 @@ public class EntityMeteorFlame extends EntityFX
         this.prevPosZ = this.posZ;
         float var1 = (float)this.particleAge / (float)this.particleMaxAge;
         float var2 = var1;
-        this.posX = posX + this.motionX * (double)var1;
-        this.posY = posY + this.motionY * (double)var1 + (double)(1.0F - var2);
-        this.posZ = posZ + this.motionZ * (double)var1;
+        this.posX = posX + this.motionX * var1;
+        this.posY = posY + this.motionY * var1 + (1.0F - var2);
+        this.posZ = posZ + this.motionZ * var1;
 
         if (this.particleAge++ >= this.particleMaxAge)
         {

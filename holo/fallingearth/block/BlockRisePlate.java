@@ -9,9 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockRisePlate extends BlockBasePressurePlate
@@ -27,6 +25,7 @@ public class BlockRisePlate extends BlockBasePressurePlate
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World)
     {
         return 10;
@@ -35,11 +34,12 @@ public class BlockRisePlate extends BlockBasePressurePlate
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
         if (!par1World.isRemote)
         {
-            int l = this.func_94350_c(par1World.getBlockMetadata(par2, par3, par4));
+            int l = this.getPowerSupply(par1World.getBlockMetadata(par2, par3, par4));
 
             if (l == 0)
             {
@@ -50,33 +50,36 @@ public class BlockRisePlate extends BlockBasePressurePlate
         par5Entity.addVelocity(0, 2, 0);
     }
 
-    protected int func_94350_c(int par1)
+    @Override
+    protected int getPowerSupply(int par1)
     {
         return par1;
     }
 
-    protected int func_94355_d(int par1)
+    @Override
+    protected int getMetaFromWeight(int par1)
     {
         return par1;
     }
 
-    protected int func_94351_d(World par1World, int par2, int par3, int par4)
+    @Override
+    protected int getPlateState(World par1World, int par2, int par3, int par4)
     {
         List list = null;
 
         if (this.triggerMobType == EnumMobType.everything)
         {
-            list = par1World.getEntitiesWithinAABBExcludingEntity((Entity)null, this.func_94352_a(par2, par3, par4));
+            list = par1World.getEntitiesWithinAABBExcludingEntity((Entity)null, this.getSensitiveAABB(par2, par3, par4));
         }
 
         if (this.triggerMobType == EnumMobType.mobs)
         {
-            list = par1World.getEntitiesWithinAABB(EntityLiving.class, this.func_94352_a(par2, par3, par4));
+            list = par1World.getEntitiesWithinAABB(EntityLiving.class, this.getSensitiveAABB(par2, par3, par4));
         }
 
         if (this.triggerMobType == EnumMobType.players)
         {
-            list = par1World.getEntitiesWithinAABB(EntityPlayer.class, this.func_94352_a(par2, par3, par4));
+            list = par1World.getEntitiesWithinAABB(EntityPlayer.class, this.getSensitiveAABB(par2, par3, par4));
         }
 
         if (list != null && !list.isEmpty())

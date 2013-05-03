@@ -8,14 +8,12 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,7 +24,8 @@ public class ItemMeteoriticShovel extends ItemSpade
         super(par1, par2);
     }
 	
-	public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
+	@Override
+    public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
 	{
 		if (player.worldObj.isRemote)
 		{
@@ -52,10 +51,10 @@ public class ItemMeteoriticShovel extends ItemSpade
 				stack.stackSize++;
 				
 				float f = 0.7F;
-				double d  = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				double d1 = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				double d2 = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				EntityItem entityitem = new EntityItem(player.worldObj, (double)x + d, (double)y + d1, (double)z + d2, stack);
+				double d  = rand.nextFloat() * f + (1.0F - f) * 0.5D;
+				double d1 = rand.nextFloat() * f + (1.0F - f) * 0.5D;
+				double d2 = rand.nextFloat() * f + (1.0F - f) * 0.5D;
+				EntityItem entityitem = new EntityItem(player.worldObj, x + d, y + d1, z + d2, stack);
 				entityitem.delayBeforeCanPickup = 10;
 				entityitem.lifespan = 6000;
 				player.worldObj.spawnEntityInWorld(entityitem);
@@ -85,6 +84,6 @@ public class ItemMeteoriticShovel extends ItemSpade
     @SideOnly(Side.CLIENT)
     public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("FallingEarth:MeteoriticShovel");
+        this.itemIcon = par1IconRegister.registerIcon("FallingEarth:MeteoriticShovel");
     }
 }

@@ -17,9 +17,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
 
 public class ItemMeteoriticPickaxe extends ItemPickaxe
 {
@@ -28,12 +26,14 @@ public class ItemMeteoriticPickaxe extends ItemPickaxe
         super(par1, par2);
     }
 	
-	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+	@Override
+    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
     {
         return false;
     }
 	
-	public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
+	@Override
+    public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
 	{
 		if (player.worldObj.isRemote)
 		{
@@ -58,10 +58,10 @@ public class ItemMeteoriticPickaxe extends ItemPickaxe
 				stack = FurnaceRecipes.smelting().getSmeltingResult(stack).copy();
 				
 				float f = 0.7F;
-				double d  = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				double d1 = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				double d2 = (double)(rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				EntityItem entityitem = new EntityItem(player.worldObj, (double)x + d, (double)y + d1, (double)z + d2, stack);
+				double d  = rand.nextFloat() * f + (1.0F - f) * 0.5D;
+				double d1 = rand.nextFloat() * f + (1.0F - f) * 0.5D;
+				double d2 = rand.nextFloat() * f + (1.0F - f) * 0.5D;
+				EntityItem entityitem = new EntityItem(player.worldObj, x + d, y + d1, z + d2, stack);
 				entityitem.delayBeforeCanPickup = 10;
 				entityitem.lifespan = 6000;
 				player.worldObj.spawnEntityInWorld(entityitem);
@@ -78,6 +78,6 @@ public class ItemMeteoriticPickaxe extends ItemPickaxe
     @SideOnly(Side.CLIENT)
     public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("FallingEarth:MeteoriticPickaxe");
+        this.itemIcon = par1IconRegister.registerIcon("FallingEarth:MeteoriticPickaxe");
     }
 }

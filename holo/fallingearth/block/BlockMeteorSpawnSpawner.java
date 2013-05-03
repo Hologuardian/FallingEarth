@@ -23,17 +23,19 @@ public class BlockMeteorSpawnSpawner extends BlockMobSpawner
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World)
     {
     	TileEntityMobSpawner var1 = new TileEntityMobSpawner();
     	var1.func_98049_a().setMobID("FallingEarth_MeteorSpawn");
-    	var1.func_98049_a().field_98286_b = 0;
+    	var1.func_98049_a().spawnDelay = 0;
         return var1;
     }
 
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return ItemHelper.meteoriticEssence.itemID;
@@ -42,6 +44,7 @@ public class BlockMeteorSpawnSpawner extends BlockMobSpawner
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return par1Random.nextInt(3) + 1;
@@ -51,11 +54,13 @@ public class BlockMeteorSpawnSpawner extends BlockMobSpawner
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**

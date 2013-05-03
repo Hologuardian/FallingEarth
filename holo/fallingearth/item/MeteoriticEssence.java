@@ -18,6 +18,6 @@ public class MeteoriticEssence extends Item
     @SideOnly(Side.CLIENT)
     public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("FallingEarth:MeteoriticEssence");
+        this.itemIcon = par1IconRegister.registerIcon("FallingEarth:MeteoriticEssence");
     }
 }

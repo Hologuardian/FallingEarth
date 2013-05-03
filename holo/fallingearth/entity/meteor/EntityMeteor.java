@@ -2,12 +2,8 @@ package holo.fallingearth.entity.meteor;
 
 import holo.fallingearth.entity.particle.EntityMeteorFlame;
 import holo.fallingearth.util.handler.MeteorLandHandler;
-import net.minecraft.entity.effect.EntityWeatherEffect;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -40,7 +36,8 @@ public class EntityMeteor extends EntityThrowable
         this.renderDistanceWeight = 12;
 	}
 
-	@SideOnly(Side.CLIENT)
+	@Override
+    @SideOnly(Side.CLIENT)
 	public int getBrightnessForRender(float par1)
 	{
 		return 15728880;
@@ -49,7 +46,8 @@ public class EntityMeteor extends EntityThrowable
 	/**
 	 * Gets how bright this entity is.
 	 */
-	public float getBrightness(float par1)
+	@Override
+    public float getBrightness(float par1)
 	{
 		return 1.0F;
 	}
@@ -64,6 +62,7 @@ public class EntityMeteor extends EntityThrowable
      * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
      * length * 64 * renderDistanceWeight Args: distance
      */
+    @Override
     public boolean isInRangeToRenderDist(double par1)
     {
         return true;
@@ -72,6 +71,7 @@ public class EntityMeteor extends EntityThrowable
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate()
     {
         super.onUpdate();
@@ -84,6 +84,7 @@ public class EntityMeteor extends EntityThrowable
         FMLClientHandler.instance().getClient().effectRenderer.addEffect(var20);
     }
     
+    @Override
     protected float getGravityVelocity()
     {
         return 0.01F;

@@ -3,7 +3,6 @@ package holo.fallingearth.util.handler;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import holo.fallingearth.entity.meteor.EntityMeteor;
 import holo.fallingearth.util.helper.BlockHelper;
 
 public class MeteorLandHandler 

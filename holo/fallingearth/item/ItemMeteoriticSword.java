@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -28,6 +27,7 @@ public class ItemMeteoriticSword extends ItemSword
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
+    @Override
     public boolean hitEntity(ItemStack var1, EntityLiving var2, EntityLiving var3)
     {
         var3.heal(2);
@@ -38,6 +38,7 @@ public class ItemMeteoriticSword extends ItemSword
     /**
      * Returns the damage against a given entity.
      */
+    @Override
     public int getDamageVsEntity(Entity var1)
     {
         return weaponDamage;
@@ -58,6 +59,6 @@ public class ItemMeteoriticSword extends ItemSword
     @SideOnly(Side.CLIENT)
     public void updateIcons(IconRegister par1IconRegister)
     {
-        this.iconIndex = par1IconRegister.registerIcon("FallingEarth:MeteoriticSword");
+        this.itemIcon = par1IconRegister.registerIcon("FallingEarth:MeteoriticSword");
     }
 }

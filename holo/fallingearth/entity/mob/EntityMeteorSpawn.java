@@ -1,6 +1,5 @@
 package holo.fallingearth.entity.mob;
 
-import holo.fallingearth.entity.ai.EntityAILeapToTarget;
 import holo.fallingearth.entity.meteor.IEntityMeteorSpinning;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -9,14 +8,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAIMoveTwardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
@@ -44,7 +41,8 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 		this.isImmuneToFire = true;
 	}
 	
-	public void onUpdate()
+	@Override
+    public void onUpdate()
 	{
 		super.onUpdate();
 		innerRotation++;
@@ -53,7 +51,8 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
-	protected String getLivingSound()
+	@Override
+    protected String getLivingSound()
 	{
 		return "";
 	}
@@ -61,7 +60,8 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
-	protected String getHurtSound()
+	@Override
+    protected String getHurtSound()
 	{
 		return "mob.blaze.hit";
 	}
@@ -69,17 +69,20 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
-	protected String getDeathSound()
+	@Override
+    protected String getDeathSound()
 	{
 		return "mob.blaze.breathe";
 	}
 
-	public float getSoundPitch()
+	@Override
+    public float getSoundPitch()
 	{
 		return 0.08F;
 	}
 
-	public float getSoundVolume()
+	@Override
+    public float getSoundVolume()
 	{
 		return 3.0F;
 	}	
@@ -87,12 +90,14 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
-	protected void fall(float par1){}
+	@Override
+    protected void fall(float par1){}
 
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
-	public boolean isAIEnabled()
+	@Override
+    public boolean isAIEnabled()
 	{
 		return true;
 	}
@@ -106,7 +111,8 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	/**
 	 * Returns the amount of damage a mob should deal.
 	 */
-	public int getAttackStrength(Entity par1Entity)
+	@Override
+    public int getAttackStrength(Entity par1Entity)
 	{
 		return 18;
 	}
@@ -120,12 +126,14 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
 	/**
 	 * Checks to make sure the light is not too bright where the mob is spawning
 	 */
-	 protected boolean isValidLightLevel()
+	 @Override
+    protected boolean isValidLightLevel()
 	 {
 		 return true;
 	 }
 
-	public boolean attackEntityAsMob(Entity par1Entity)
+	@Override
+    public boolean attackEntityAsMob(Entity par1Entity)
     {
         int i = this.getAttackStrength(par1Entity);
 
@@ -154,7 +162,7 @@ public class EntityMeteorSpawn extends EntityMob implements IEntityMeteorSpinnin
             if (j > 0)
             {
             	this.heal(5);
-                par1Entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)j * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)j * 0.5F));
+                par1Entity.addVelocity(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F);
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }

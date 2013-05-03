@@ -14,19 +14,23 @@ import cpw.mods.fml.common.TickType;
 public class ClientTickHandler implements ITickHandler
 {
 
-	public void tickStart(EnumSet var1, Object ... var2) {}
+	@Override
+    public void tickStart(EnumSet var1, Object ... var2) {}
 
-	public void tickEnd(EnumSet var1, Object ... var2)
+	@Override
+    public void tickEnd(EnumSet var1, Object ... var2)
 	{
 		onTickInGame();
 	}
 
-	public EnumSet ticks()
+	@Override
+    public EnumSet ticks()
 	{
 		return EnumSet.of(TickType.CLIENT);
 	}
 
-	public String getLabel()
+	@Override
+    public String getLabel()
 	{
 		return "Falling Earth Client Tick Handler";
 	}

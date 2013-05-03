@@ -2,7 +2,6 @@ package holo.fallingearth.util.handler;
 
 import holo.fallingearth.entity.meteor.EntityMeteor;
 
-import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
