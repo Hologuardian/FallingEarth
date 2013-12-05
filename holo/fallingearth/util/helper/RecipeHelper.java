@@ -14,9 +14,9 @@ public class RecipeHelper
 		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticAxe, 1), new Object[] {"yy ", "yx ", " x ", 'y', ItemHelper.meteoriticEssence , 'x', Item.stick});
 		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticPickaxe, 1), new Object[] {"yyy", " x ", " x ", 'y', ItemHelper.meteoriticEssence , 'x', Item.stick});
 		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticHead, 1), new Object[] {"yyy", "y y", 'y', ItemHelper.meteoriticEssence});
-		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticBody, 1), new Object[] {" y ", " y ", " x ", 'y', ItemHelper.meteoriticEssence});
-		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticLegs, 1), new Object[] {" y ", " y ", " x ", 'y', ItemHelper.meteoriticEssence});
-		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticBoots, 1), new Object[] {" y ", " y ", " x ", 'y', ItemHelper.meteoriticEssence});
+		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticBody, 1), new Object[] {"y y", "yyy", "yyy", 'y', ItemHelper.meteoriticEssence});
+		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticLegs, 1), new Object[] {"yyy", "y y", "y y", 'y', ItemHelper.meteoriticEssence});
+		GameRegistry.addRecipe(new ItemStack(ItemHelper.meteoriticBoots, 1), new Object[] {"   ", "y y", "y y", 'y', ItemHelper.meteoriticEssence});
 		GameRegistry.addRecipe(new ItemStack(BlockHelper.risePlate, 1), new Object[] {"xyx", "ydy", "xyx", 'y', ItemHelper.meteoriticEssence , 'x', Block.stone, 'd', Item.diamond});
 	}
 }
